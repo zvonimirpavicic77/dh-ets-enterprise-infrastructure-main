@@ -1,0 +1,4 @@
+.env
+*.jsonl
+*.csv
+terraform-code/.terraform/

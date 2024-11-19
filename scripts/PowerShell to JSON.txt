@@ -1,0 +1,68 @@
+PowerShell to JSON Conversion
+PowerShell provides two cmdlets to convert objects to and from JSON:
+
+ConvertTo-Json: Converts a PowerShell object to a JSON string.
+ConvertFrom-Json: Converts a JSON string to a PowerShell object.
+Example 1: Simple Conversion
+Create a PowerShell object:
+
+$person = [PSCustomObject]@{
+    Name = 'John Doe'
+    Age = 30
+    Occupation = 'Developer'
+}
+
+Convert the object to JSON:
+
+$person | ConvertTo-Json
+
+Output:
+
+{
+    "Name": "John Doe",
+    "Age": 30,
+    "Occupation": "Developer"
+}
+
+Example 2: Nested Conversion
+Create a nested PowerShell object:
+
+$address = [PSCustomObject]@{
+    Street = '123 Main St'
+    City = 'Anytown'
+    State = 'CA'
+    Zip = '12345'
+}
+
+$person = [PSCustomObject]@{
+    Name = 'John Doe'
+    Age = 30
+    Occupation = 'Developer'
+    Address = $address
+}
+
+Convert the object to JSON:
+
+$person | ConvertTo-Json
+
+Output:
+
+{
+    "Name": "John Doe",
+    "Age": 30,
+    "Occupation": "Developer",
+    "Address": {
+        "Street": "123 Main St",
+        "City": "Anytown",
+        "State": "CA",
+        "Zip": "12345"
+    }
+}
+
+Options and Parameters
+The ConvertTo-Json cmdlet has several options and parameters to customize the conversion:
+
+-Depth: Specifies the maximum depth of the JSON output. Default is 2.
+-Compress: Compresses the JSON output to reduce its size.
+-AsHashtable: Converts the JSON object to a PowerShell hash table (PowerShell 6.0 and later).
+-NoEnumerate: Suppresses enumeration of arrays and objects (PowerShell 7.3 and later).

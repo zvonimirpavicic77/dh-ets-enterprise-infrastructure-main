@@ -1,0 +1,26 @@
+name: Docker CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-test-deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Cleanup docker
+        run: chmod +x scripts/cleanup_docker.sh && scripts/cleanup_docker.sh
+        shell: bash
+          
+      - name: Build Docker
+        run: chmod +x scripts/build_docker.sh && scripts/build_docker.sh
+        shell: bash
+
+      - name: Deploy to EC2 instance
+        run: chmod +x scripts/run_docker.sh  && scripts/run_docker.sh
+        shell: bash
